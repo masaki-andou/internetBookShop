@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.projects.mapper.UserMapper">
+	<!-- 注意，此mapper对应数据库表名为customer -->
+
+	<!-- *******************  单表查询    *********************** -->
+	<sql id="query_user_where">
+		<if test="user != null">
+			<if test="user.username != null and user.username !=''">
+				and username=#{user.username}
+			</if>
+			<if test="user.password != null and user.password !=''">
+				and password=#{user.password}
+			</if>
+		</if>
+	</sql>
+
+	<select id="findUserById" parameterType="long" resultType="com.projects.model.User">
+		SELECT * FROM customer WHERE id=#{id}
+	</select>
+	
+	<!-- 根据名称查询用户名是否存在,也可查詢所有用戶 -->
+	<select id="findUser" resultType="com.projects.model.UserCustom" parameterType="com.projects.queryVO.UserQueryVO">
+		SELECT * FROM customer
+		<where>
+			<include refid="query_user_where"></include>
+		</where>
+	</select>
+</mapper>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+</head>
+<body>
+    <form id="form_data">
+        <label for="username">用户名：</label>
+        <input id="username" type="text" placeholder="请输入用户名"/><br/>
+        <label for="password">密码：</label>
+        <input id="password" type="password" placeholder="请输入密码"/><br/>
+        <input type="submit" id="submit" value="登录"/>
+    </form>
+    <input id="btn" type="button" value="button1"/>
+
+    <script>
+        window.onload = function(){
+            document.getElementById('btn').addEventListener('click',function(){
+                alert("fdasfs");
+            });
+        };
+
+        function login() {
+            alert("dfad");
+            import getJsonData from "./js/getJsonData";
+
+
+            let url = "http://localhost:8080/internetBookShop/user/loginHandle";
+            let myHeader = new Headers();
+            let data = {'username':document.getElementById('username').value,
+                'password':document.getElementById('password').value};
+            myHeader.append('Content-Type','application/json;charset=utf-8');
+            form.addEventListener('submit',function(){
+                let jsonData = getJsonData(url,{
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: myHeader,
+                    body: JSON.stringify(data)
+                });
+                console.log(jsonData);
+            });
+        }
+
+
+    </script>
+</body>
+</html>
